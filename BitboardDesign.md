@@ -19,7 +19,7 @@ Dominikus Herzberg, [@denkspuren](https://twitter.com/denkspuren)
 ## A Binary Board Encoding for "Four in a Row"
 
 In Java and in many other programming languages, a so-called long integer is composed of eight bytes.
-Eight bytes are eight 64 bits (1 byte = 8 bits). If presented as a series of ones and zeros, the
+Eight bytes are 64 bits (1 byte = 8 bits). If presented as a series of ones and zeros, the
 most significant bit (MSB) is on the left hand side, the least significant bit (LSB) is on the right hand side.
 That's why we number the bits in the way shown below from right to left. Remember, programmers start counting
 with zero ;-)
@@ -88,9 +88,8 @@ Got it? It's not that hard to understand, is it?
 ## Remember the Fill Level
 
 There is an addition piece of information tracked that speeds up making and
-undoing moves. The position being next to
-be filled per column is remembered in an array named `height`.
-For the example shown, the values for `height` are:
+undoing moves. The position to be filled next in a column is remembered in
+an array named `height`. For the example shown, 
 
 ~~~
                 6 13 20 27 34 41 48
@@ -103,6 +102,8 @@ For the example shown, the values for `height` are:
 -------------
 0 1 2 3 4 5 6  
 ~~~
+
+the values for `height` are:
 
 ~~~
 int[] height = {0, 7, 15, 24, 30, 35, 42};
