@@ -3,9 +3,9 @@
 [Fhourstones](https://en.wikipedia.org/wiki/Fhourstones) is a benchmark that is based on a highly efficient
 [implementation](http://tromp.github.io/c4/fhour.html) of  the game [Connect Four](https://en.wikipedia.org/wiki/Connect_Four).
 Its author, [John Tromp](http://tromp.github.io/), uses two bitboards to represent the board from each player's
-point of view. A [bitboard](https://en.wikipedia.org/wiki/Bitboard) encodes the current position as a series of ones and zeros.
-The encoding is designed for speed in operating with the board. Especially querying the board for four in a row is
-extremely fast.
+point of view. A [bitboard](https://en.wikipedia.org/wiki/Bitboard) encodes the current position of a single player
+as a series of ones and zeros. The encoding is designed for speed in operating with the board.
+Especially querying the board for four in a row is extremely fast.
 
 I figured that my students struggle with understanding John's implementation. That's why I created this document.
 My explanation leans on John's code. However, we don't go through John's code line by line. Instead, I try to
