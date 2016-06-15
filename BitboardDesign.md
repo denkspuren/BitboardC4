@@ -16,7 +16,9 @@ Enjoy,
 
 Dominikus Herzberg, [@denkspuren](https://twitter.com/denkspuren) 
 
-## A Binary Board Encoding for "Four in a Row"
+## A Binary Board Encoding for "Connect Four"
+
+### Using Two Longs to Encode the Board
 
 In Java and in many other programming languages, a so-called long integer is composed of eight bytes.
 Eight bytes are 64 bits (1 byte = 8 bits). If presented as a series of ones and zeros, the
@@ -84,6 +86,12 @@ Leading zeros, i.e. the bits beyond position 48, are cut off.
 ~~~
 
 Got it? It's not that hard to understand, is it?
+
+### Binary Operations
+
+To work with a series of bits you need operations to manipulate them. All we need is (a) to shift bits and (b) to combine bits.
+
+The operators `>>` and `<<` shift bits to the right and to the left respectively.
 
 ## Remember the Fill Level
 
