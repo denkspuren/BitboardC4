@@ -113,7 +113,7 @@ int[] height = {0, 7, 15, 24, 30, 35, 42};
 
 ~~~
 void makeMove(int col) {
-    int move = 1L << height[col]++; // (1)
+    long move = 1L << height[col]++; // (1)
     bitboard[counter & 1] ^= move;  // (2)
     moves[counter++] = col;         // (3)
 }
@@ -124,7 +124,7 @@ void makeMove(int col) {
 ~~~
 void undoMove() {
     int col = moves[--counter];     // reverses (3)
-    int move = 1L << --height[col]; // reverses (1)
+    long move = 1L << --height[col]; // reverses (1)
     bitboard[counter & 1] ^= move;  // reverses (2)
 }
 ~~~
