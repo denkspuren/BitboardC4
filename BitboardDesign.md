@@ -164,7 +164,7 @@ The code is highly regular and redundant.
 ~~~
 boolean isWin(long bitboard) {
     int[] directions = {1, 7, 6, 8};
-    for(int direction : direction)
+    for(int direction : directions)
         if (bitboard & (bitboard >> direction) &
            (bitboard >> (2 * direction)) & (bitboard >> (3 * direction)) != 0)
            return true;
