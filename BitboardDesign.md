@@ -30,20 +30,24 @@ with zero ;-)
 63 62 61 60 ... 48 47 46 45 ... 3 2 1 0
 ~~~
 
-Connect Four is played on a vertical board with seven columns and six rows. That makes 42 slots. We add an
-additional row on top for convenience purposes. This additional row is for computational reasons only.
+Connect Four is played on a vertical board with seven columns and six rows. That makes 42 slots.
+The board with these 42 slots is shown in the diagram below.
+We add an additional row on top for convenience purposes. This additional row on top is for computational reasons only.
+And so are the bits numbered 49 to 63, adding two more columns and a bit.
+The bits of the top row (6, 13, 20, etc.) and the bits on the right (49 - 63) are seemingly unused
+but nonetheless important and not to forget in their role when it comes to manipulating the bits.
 
 The slots are numbered from 0 to 48. The numbers indicate the position in the bit representation of a long integer.
 
 ~~~
-  6 13 20 27 34 41 48    Additional row
+  6 13 20 27 34 41 48   55 62     Additional row
 +---------------------+ 
-| 5 12 19 26 33 40 47 |  top row
-| 4 11 18 25 32 39 46 |
-| 3 10 17 24 31 38 45 |
-| 2  9 16 23 30 37 44 |
-| 1  8 15 22 29 36 43 |
-| 0  7 14 21 28 35 42 |  bottom row
+| 5 12 19 26 33 40 47 | 54 61     top row
+| 4 11 18 25 32 39 46 | 53 60
+| 3 10 17 24 31 38 45 | 52 59
+| 2  9 16 23 30 37 44 | 51 58
+| 1  8 15 22 29 36 43 | 50 57
+| 0  7 14 21 28 35 42 | 49 56 63  bottom row
 +---------------------+
 ~~~
 
@@ -89,9 +93,14 @@ Got it? It's not that hard to understand, is it?
 
 ### Binary Operations
 
-To work with a series of bits you need operations to manipulate them. All we need is (a) to shift bits and (b) to combine bits.
+To work with a series of bits you need operations to manipulate them. All we need is two kinds of operations: 
+to shift bits and to combine bits.
+
+#### Shifting Bits
 
 The operators `>>` and `<<` shift bits to the right and to the left respectively.
+
+#### Combining Bits
 
 ## Remember the Fill Level
 
