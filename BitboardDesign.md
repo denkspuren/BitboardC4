@@ -77,7 +77,7 @@ position with disks `X` only, the other bitboard the position with disks `O` onl
 ~~~
 
 Shown as a flat series of ones and zeros the two bitboards look like this.
-Leading zeros, i.e. the bits beyond position 48, are cut off. 
+Leading zeros, i.e. the bits beyond position 48, are cut off.
 
 ~~~
 ... 0000000 0000000 0000010 0000011 0000000 0000000 0000000 // encoding Xs
@@ -95,7 +95,7 @@ The operators `>>` and `<<` shift bits to the right and to the left respectively
 
 ## Remember the Fill Level
 
-There is an addition piece of information tracked that speeds up making and
+There is an additional piece of information tracked that speeds up making and
 undoing moves. The position to be filled next in a column is remembered in
 an array named `height`. For the example shown, 
 
