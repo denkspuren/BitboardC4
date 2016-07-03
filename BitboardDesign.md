@@ -91,14 +91,18 @@ Leading zeros, i.e. the bits beyond position 48, are cut off.
 
 Got it? It's not that hard to understand, is it?
 
-### Binary Operations
+### Bitwise Operations
 
 To work with a series of bits you need operations to manipulate them. All we need is two kinds of operations: 
 to shift bits and to combine bits.
 
 #### Shifting Bits
 
-The operators `>>` and `<<` shift bits to the right and to the left respectively.
+The operators `>>` and `<<` shift bits to the right and to the left, respectively.
+
+Saying e.g. `0b10101110 >> 3` means that three bits are shifted out to the right with three zeros being shifted in on the left. Here, the prefix `0b` indicates that the following digits represent a binary number and not a decimal number. Assumed that `0b10101110` is a binary number of maximum eight bits, the result is `0b00010101`.
+
+Accordingly, `0b10101110 << 3` shifts three bits out to the left and shifts in three zeros on the right. The result is `0b01110000`. 
 
 #### Combining Bits
 
