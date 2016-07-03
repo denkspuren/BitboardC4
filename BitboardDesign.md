@@ -102,9 +102,24 @@ The operators `>>` and `<<` shift bits to the right and to the left, respectivel
 
 Saying e.g. `0b10101110 >> 3` means that three bits are shifted out to the right with three zeros being shifted in on the left. Here, the prefix `0b` indicates that the following digits represent a binary number and not a decimal number. Assumed that `0b10101110` is a binary number of maximum eight bits, the result is `0b00010101`.
 
-Accordingly, `0b10101110 << 3` shifts three bits out to the left and shifts in three zeros on the right. The result is `0b01110000`. 
+Accordingly, `0b10101110 << 3` shifts three bits out to the left and shifts in three zeros on the right. The result is `0b01110000` if we assume a length of eight bits.
 
 #### Combining Bits
+
+The only operator we need in this context is the so-called XOR-operator. The XOR-operator (written as `^`) takes two binary numbers, say `0b10101110 ^ 0b10011111`, and compares bits of the same position. If both bits are not equal, the result is a one; otherwise it's a zero. That's the rule for the XOR-operator.
+
+If we write the second number below the first number, the bit positions are easier to compare. Only pairs of `10` and `01` result in a `1`.
+
+~~~
+  10101110
+^ 10011111
+----------
+  00110001
+~~~
+
+That is, `0b10101110 ^ 0b10011111` results in `0b00110001`.
+
+For more information on bit shifting and other bit operations such as OR, AND and NOT you might consult Wikipedia on [Bitwise Operations](https://en.wikipedia.org/wiki/Bitwise_operation).
 
 ## Remember the Fill Level
 
