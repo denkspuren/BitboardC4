@@ -37,7 +37,7 @@ And so are the bits numbered 49 to 63, adding two more columns and a bit.
 The bits of the top row (6, 13, 20, etc.) and the bits on the right (49 - 63) are seemingly unused
 but nonetheless important and not to forget in their role when it comes to manipulating the bits.
 
-The slots are numbered from 0 to 48. The numbers indicate the position in the bit representation of a long integer.
+The numbers indicate the position in the bit representation of a long integer.
 
 ~~~
   6 13 20 27 34 41 48   55 62     Additional row
