@@ -68,7 +68,7 @@ Let's take an example, given the following position:
 
 Connect Four is played by two players. There is one bitboard for each player.
 We encode the position separately for each player. One bitboard encodes the
-position with disks `X` only, the other bitboard the position with disks `O` only.
+position with tokens `X` only, the other bitboard the position with tokens `O` only.
 
 ~~~
                0 0 0 0 0 0 0  0 0 0 0 0 0 0   6 13 20 27 34 41 48
@@ -168,7 +168,7 @@ the values for `height` are:
 int[] height = {0, 7, 15, 24, 30, 35, 42};
 ~~~
 
-The variable `height` serves as a memory where the next disk goes given the column. Otherwise we would need to search for the next empty slot given the bottom of a column. Having a memory saves searching and makes things faster. And that is what we are up to with bitboards. We want to be as fast as possible with manipulating a board representation of Connect Four.
+The variable `height` serves as a memory where the next token goes given the column. Otherwise we would need to search for the next empty slot given the bottom of a column. Having a memory saves searching and makes things faster. And that is what we are up to with bitboards. We want to be as fast as possible with manipulating a board representation of Connect Four.
 
 ### Have a Counter
 
