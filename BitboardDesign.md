@@ -106,7 +106,9 @@ Accordingly, `0b10101110 << 3` shifts three bits out to the left and shifts in t
 
 #### Combining Bits
 
-The only operator we need in this context is the so-called XOR-operator. The XOR-operator (written as `^`) takes two binary numbers, say `0b10101110 ^ 0b10011111`, and compares bits of the same position. If both bits are not equal, the result is a one; otherwise it's a zero. That's the rule for the XOR-operator.
+The only two operators we need in this context are the so-called XOR-operator and the AND-operator.
+
+The XOR-operator (written as `^`) takes two binary numbers, say `0b10101110 ^ 0b10011111`, and compares bits of the same position. If both bits are not equal, the result is a one; otherwise it's a zero. That's the rule for the XOR-operator.
 
 If we write the second number below the first number, the bit positions are easier to compare. Only pairs of `10` and `01` result in a `1`.
 
@@ -118,6 +120,17 @@ If we write the second number below the first number, the bit positions are easi
 ~~~
 
 That is, `0b10101110 ^ 0b10011111` results in `0b00110001`.
+
+The AND-operator (written as `&`) also takes two binary numbers. Comparing the bits of both numbers, it returns a one only if the first bit *and* the second bit are one; therwise it returns zero for the position under consideration. For example
+
+~~~
+  10101110
+& 10011111
+----------
+  10001110
+~~~
+
+In other words, `0b10101110 & 0b10011111` results in `0b10001110`.
 
 For more information on bit shifting and other bit operations such as OR, AND and NOT you might consult Wikipedia on [Bitwise Operations](https://en.wikipedia.org/wiki/Bitwise_operation).
 
@@ -149,9 +162,13 @@ the values for `height` are:
 int[] height = {0, 7, 15, 24, 30, 35, 42};
 ~~~
 
-The variable `height` serves as a memory where the next disk goes given the column. Otherwise we would need to search for the next empty slot given the bottom of a column. Having a memory saves searching and makes things faster. And that is what we are up to with bitboards. We want to be as fast as possible with manipulating a board representation of Connect Four. 
+The variable `height` serves as a memory where the next disk goes given the column. Otherwise we would need to search for the next empty slot given the bottom of a column. Having a memory saves searching and makes things faster. And that is what we are up to with bitboards. We want to be as fast as possible with manipulating a board representation of Connect Four.
 
-## Make Move
+### Counting helps
+
+Another piece of information we track is the number of moves done, a `counter`. Each time we make a move we increment the counter, each time we undo a move we decrement the counter. For incrementation we use the increment operator `++` (add one), for decrementation we use the decrement operator `--` (subtract one).
+
+### Make Move
 
 ~~~
 void makeMove(int col) {
@@ -161,7 +178,7 @@ void makeMove(int col) {
 }
 ~~~
 
-## Undo Move
+### Undo Move
 
 ~~~
 void undoMove() {
@@ -171,7 +188,7 @@ void undoMove() {
 }
 ~~~
 
-## Four In A Row?
+### Four In A Row?
 
 ~~~
   6 13 20 27 34 41 48    Additional row
@@ -228,7 +245,7 @@ for the for-statement, we might end up with about 40 instructions altogether.
 On a machine crunching 2 billion instructions per second, we can run
 50 million checks of `isWin` per second.
 
-## A Generator to List Moves
+### A Generator to List Moves
 
 ~~~
 int[] listMoves() {
