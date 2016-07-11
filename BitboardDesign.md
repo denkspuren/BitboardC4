@@ -148,7 +148,7 @@ Before we look into the methods, we need some few data the methods operate on: `
 
 Before we look into the methods more closely, there is an additional piece of information tracked that speeds up making and
 undoing moves. The position to be filled next in a column is remembered in
-an array named `height`. For the example shown, 
+an array declared `int[] height`. For the example shown, 
 
 ~~~
                 6 13 20 27 34 41 48
@@ -165,7 +165,7 @@ an array named `height`. For the example shown,
 the values for `height` are:
 
 ~~~
-int[] height = {0, 7, 15, 24, 30, 35, 42};
+{0, 7, 15, 24, 30, 35, 42}
 ~~~
 
 The variable `height` serves as a memory where the next token goes given the column. Otherwise we would need to search for the next empty slot given the bottom of a column. Having a memory saves searching and makes things faster. And that is what we are up to with bitboards. We want to be as fast as possible with manipulating a board representation of Connect Four.
@@ -195,7 +195,7 @@ void makeMove(int col) {
 The code says:
 
 1. Given the column `col`, get the index(!) of the position stored in `height` for that column, shift a single bit (`1L`) to that position in the binary representation of the bitboard and store the result in `move`; afterwards (because the increment operator is in postfix position), `height[col]` is incremented by one.
-2. `bitboard[counter & 1]` gets us the bitboard of the party (either `X` or `O`) on turn. The bit `move` is simply set on the corresponding bitboard. `bitboard[counter & 1] ^= move;` is a shortcut for `bitboard[counter & 1] = bitboard[counter & 1] ^ move;`.
+2. `bitboard[counter & 1]` gets us the bitboard of the party (either `X` or `O`) on turn. The bit `move` is simply set via the XOR-operator on the corresponding bitboard. `bitboard[counter & 1] ^= move;` is a shortcut for `bitboard[counter & 1] = bitboard[counter & 1] ^ move;`.
 3. Store the column `col` in the history of `moves`, afterwards (because `++` is again in postfix position) increment the `counter`.
 
 Even if you are not into the details of a programming language (which makes it three lines of code instead of, say, five), you should get the idea of what's going on.
@@ -242,7 +242,7 @@ So, the "magic" difference numbers on the bitboard are 1, 6, 7 and 8.
 
 Let's take a bitboard and shift a copy of it by 6 to the right, another copy by twice as much, and a final copy by thrice as much to the right. Then let's "overlay" all copies with the AND-operator. The effect is that all of the vertically distributed positions of the bitboard making up four in a row (vertically) are now queried: Is each one of you a one? If so, we identified four bits in a row.
 
-The point is that bit shifting and overlaying is a parallel operation for all positions on the board! You don't look at an individual position, you look at all the positions on the board at once and check for their neighbors being another three bits set as well.
+The point is that bit shifting and combining bits make it a parallel computation for all positions on the board! You don't look at an individual position, you look at all the positions on the board at once and check for their neighbors being another three bits set as well.
 
 If you get the basic idea, the following code should come as no surprise. The code literally does what we just described.
 
@@ -256,7 +256,7 @@ boolean isWin(long bitboard) {
 }
 ~~~
 
-Notice that the additional row on the top of the regular board (positions 6, 13, 20, 27, 34, 41, 48) and the additional rows at the right (position 49 and up) are essential. They hold values of zero and are essential to prevent us from finding four in a row crossing "boarders". For example, checking the diagonal 9, 15, 21 has 27 next; "luckily", position 27 -- being a member of the additional top row -- is always zero. Without these additional row and columns our bitboards would not work.
+Notice that the additional row on the top of the regular board (positions 6, 13, 20, 27, 34, 41, 48) and the additional rows at the right (position 49 and up) are essential. They hold values of zero and are vital to prevent us from finding four in a row crossing "boarders". For example, checking the diagonal 9, 15, 21 has 27 next; "luckily", position 27 -- being a member of the additional top row -- is always zero. Without these additional row and columns our bitboards would not work.
 
 The code above is highly regular and redundant. We might choose to capture the "magic" numbers in an array called `directions` and iterate over the numbers in a `for`-loop.
 
