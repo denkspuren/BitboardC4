@@ -89,7 +89,9 @@ Leading zeros, i.e. the bits beyond position 48, are cut off.
       col 6   col 5   col 4   col 3   col 2   col 1   col 0
 ~~~
 
-Got it? It's not that hard to understand, is it?
+Got it? It's not that hard to understand, is it? This encoding is the key to the magic that makes bitboards so fast.
+
+Subsequently, we assume that both bitboards are stored in an array declared `long[] bitboard`. The array contains only two bitboards (two long integers), of course: one encoding the `X`s on the board, the other one encoding the `O`s.
 
 ### Bitwise Operations
 
