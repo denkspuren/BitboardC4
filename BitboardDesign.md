@@ -242,7 +242,7 @@ Let's take a bitboard and shift a copy of it by 6 to the right, another copy by 
 
 The point is that bit shifting and overlaying is a parallel operation for all positions on the board! You don't look at an individual position, you look at all the positions on the board at once and check for their neighbors being another three bits set as well.
 
-If you get the basic idea, the following code should come as no surprise. We code literally does what we just described.
+If you get the basic idea, the following code should come as no surprise. The code literally does what we just described.
 
 ~~~
 boolean isWin(long bitboard) {
@@ -267,7 +267,7 @@ boolean isWin(long bitboard) {
 }
 ~~~
 
-
+You might catch the point that shifting a bitpattern once, twice and thrice is a bit of overdoing things. In case you want to save one shift operation and a multiplication by 3, you can use an intermediate variable called `bb` and get a little bit better off. In terms of machine code this saves you a few cycles of computations. Other than that the following code does exactly the same as our more verbose version of `isWin` does.
 
 ~~~
 boolean isWin(long bitboard) {
@@ -281,15 +281,9 @@ boolean isWin(long bitboard) {
 }
 ~~~
 
-Per direction the routine needs one assignment, two shifts, two binary
-and-operations, one multiplication, and a comparison, i.e. seven operations
-which relate to almost seven byte code instructions on the JVM.
-A full evaluation considering all four directions requires four times that
-much, that is 4 x 7 = 28 instructions. Including the instructions required
-for the for-statement, we might end up with about 40 instructions altogether.
+Per direction the routine needs one assignment, two shifts, two binary AND-operations, one multiplication, and a comparison, i.e. seven operations which relate to almost seven machine code or byte code instructions. A full evaluation considering all four directions requires four times that much, that is 4 x 7 = 28 instructions. Including the instructions required for the `for`-statement, we might end up with 30-something instructions altogether.
 
-On a machine crunching 2 billion instructions per second, we can run
-50 million checks of `isWin` per second.
+On a machine crunching 2 billion instructions per second, we can run 50 million checks of `isWin` per second (assuming 40 instructions per check). That's quite a number.
 
 ### A Generator to List Moves
 
