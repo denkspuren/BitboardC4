@@ -16,7 +16,7 @@ Enjoy,
 
 Dominikus Herzberg, [@denkspuren](https://twitter.com/denkspuren) 
 
-## A Binary Board Encoding for "Connect Four"
+## A Binary Board Encoding for Connect Four
 
 ### Using Two Longs to Encode the Board
 
@@ -121,9 +121,13 @@ That is, `0b10101110 ^ 0b10011111` results in `0b00110001`.
 
 For more information on bit shifting and other bit operations such as OR, AND and NOT you might consult Wikipedia on [Bitwise Operations](https://en.wikipedia.org/wiki/Bitwise_operation).
 
-## Remember the Fill Level
+## Let's Play with the Bitboards
 
-There is an additional piece of information tracked that speeds up making and
+To demonstrate the use of bitboards we implement four methods: make a move (`makeMove`), undo a move (`undoMove`), check whether there are four in a row (`isWin`), list all possible moves in a given situation (`listMoves`). As our means of communication, we use pseudo-code which is close to TypeScript and Java. Only slight adaptations are required for any of the two languages. It is up to you to properly embed this code in a class statement. 
+
+### Remember the Fill Level
+
+Before we look into the methods more closely, there is an additional piece of information tracked that speeds up making and
 undoing moves. The position to be filled next in a column is remembered in
 an array named `height`. For the example shown, 
 
@@ -144,6 +148,8 @@ the values for `height` are:
 ~~~
 int[] height = {0, 7, 15, 24, 30, 35, 42};
 ~~~
+
+The variable `height` serves as a memory where the next disk goes given the column. Otherwise we would need to search for the next empty slot given the bottom of a column. Having a memory saves searching and makes things faster. And that is what we are up to with bitboards. We want to be as fast as possible with manipulating a board representation of Connect Four. 
 
 ## Make Move
 
