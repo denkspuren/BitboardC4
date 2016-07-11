@@ -313,3 +313,5 @@ That's it folks.
 If you think things through you realize that bitboards are just a highly optimized data structure. The underlying idea is a board encoding by means of an one-dimensional array of integers. Splitting the array into two arrays, one for each party, makes it essentially two bit arrays. And instead of using arrays, a long integer does also qualify as a special case of a bit array. Indexing becomes bit shifting, reading and writing become bit operations. And with bit operations comes parallelization: per direction you check for four in a row for each position on the board.
 
 I hope you enjoyed the fun being on a bit level, even when you are using Java, TypeScript or any other "high-level" language.
+
+In case you are a german native speaker, you might be interested in watching a video of mine: [Bitboards for Tic-Tac-Toe](https://www.youtube.com/watch?v=5t5jzkO0t7w). The four directions (remember the "magic" numbers) get part of the bit encoding, which makes the check for three in a row superfast.
