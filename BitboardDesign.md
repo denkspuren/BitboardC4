@@ -180,6 +180,8 @@ In a variable called `moves`, actually an array declared `int[] moves`, we remem
 
 ### Make Move
 
+Have a look at the code that describes how to make a move given a column; the column being an integer value ranging from `0` to `6` including both limiting values. It's just three line of code in the body of `makeMove`.
+
 ~~~
 void makeMove(int col) {
     long move = 1L << height[col]++; // (1)
@@ -187,6 +189,12 @@ void makeMove(int col) {
     moves[counter++] = col;         // (3)
 }
 ~~~
+
+The code says:
+
+1. Given the column `col`, get the index(!) of the position stored in `height` for that column, shift a single bit (`1L`) to that position in the binary representation of the bitboard and store the result in `move`; afterwards (because the increment operator is in postfix position), `height[col]` is incremented by one.
+2. `bitboard[counter & 1]` gets us the bitboard of the party (either `X` or `O`) on turn. The bit `move` is simply set on the corresponding bitboard. `bitboard[counter & 1] ^= move;` is a shortcut for `bitboard[counter & 1] = bitboard[counter & 1] ^ move;`.
+3. Store the column `col` in the history of `moves`, afterwards (because `++` is again in postfix position) increment the `counter`.
 
 ### Undo Move
 
