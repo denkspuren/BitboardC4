@@ -196,6 +196,8 @@ The code says:
 2. `bitboard[counter & 1]` gets us the bitboard of the party (either `X` or `O`) on turn. The bit `move` is simply set on the corresponding bitboard. `bitboard[counter & 1] ^= move;` is a shortcut for `bitboard[counter & 1] = bitboard[counter & 1] ^ move;`.
 3. Store the column `col` in the history of `moves`, afterwards (because `++` is again in postfix position) increment the `counter`.
 
+Even if you are not into the details of a programming language (which makes it three lines of code instead of, say, five), you should get the idea of what's going on.
+
 ### Undo Move
 
 Method `undoMove` basically reverses the steps done in `makeMove`. See yourself:
@@ -214,6 +216,10 @@ void undoMove() {
 
 ### Four In A Row?
 
+We are getting to the heart, why we are using bitboards. Since we need to check for four in a row almost every time a move is made, it is in our interest to get the check done as quickly as possible. Speed improves the number of positions investigated per second, and the sheer number of positions crunched correlates with the perceived computer's "intelligence" of play.
+
+Look again at the encoding of positions in a bitboard.
+
 ~~~
   6 13 20 27 34 41 48    Additional row
 +---------------------+ 
@@ -226,15 +232,29 @@ void undoMove() {
 +---------------------+
 ~~~
 
+To check if there are four in a row horizontally, we need for example to look at positions 11, 18, 25 and 32 whether they are all set to one. Likewise, we might check positions 21, 28, 35 and 42. The underlying positional pattern is that the positions looked at differ by a constant number of 7. Take the leftmost position (here 11 and 21, respectively), add 7 and 7 and 7 again, you get the four positions to look at.
+
+Vertically, the difference is 1, take position 15 and 16 as an example. Diagonally it's either a difference of 8 (take 16 and 24 as an example) or a difference of 6 (take 30 and 36).
+
+So, the "magic" difference numbers on the bitboard are 1, 6, 7 and 8.
+
+Let's take a bitboard and shift a copy of it by 6 to the right, another copy by twice as much, and a final copy by thrice as much to the right. Then let's "overlay" all copies with the AND-operator. The effect is that all of the vertically distributed positions of the bitboard making up four in a row (vertically) are now queried: Is each one of you a one? If so, we identified four bits in a row.
+
+The point is that bit shifting and overlaying is a parallel operation for all positions on the board! You don't look at an individual position, you look at all the positions on the board at once and check for their neighbors being another three bits set as well.
+
+If you get the basic idea, the following code should come as no surprise. We code literally does what we just described.
+
 ~~~
-if (bitboard & (bitboard >> 6) & (bitboard >> 12) & (bitboard >> 18) != 0) return true; // diagonal \
-if (bitboard & (bitboard >> 8) & (bitboard >> 16) & (bitboard >> 24) != 0) return true; // diagonal /
-if (bitboard & (bitboard >> 7) & (bitboard >> 14) & (bitboard >> 21) != 0) return true; // horizontal
-if (bitboard & (bitboard >> 1) & (bitboard >>  2) & (bitboard >>  3) != 0) return true; // vertical
-return false;
+boolean isWin(long bitboard) {
+  if (bitboard & (bitboard >> 6) & (bitboard >> 12) & (bitboard >> 18) != 0) return true; // diagonal \
+  if (bitboard & (bitboard >> 8) & (bitboard >> 16) & (bitboard >> 24) != 0) return true; // diagonal /
+  if (bitboard & (bitboard >> 7) & (bitboard >> 14) & (bitboard >> 21) != 0) return true; // horizontal
+  if (bitboard & (bitboard >> 1) & (bitboard >>  2) & (bitboard >>  3) != 0) return true; // vertical
+  return false;
+}
 ~~~
 
-The code is highly regular and redundant.
+The code is highly regular and redundant. We might choose to capture the "magic" numbers in an array called `directions` and iterate over the numbers in a `for`-loop.
 
 ~~~
 boolean isWin(long bitboard) {
@@ -246,6 +266,8 @@ boolean isWin(long bitboard) {
     return false;
 }
 ~~~
+
+
 
 ~~~
 boolean isWin(long bitboard) {
