@@ -174,7 +174,7 @@ Another piece of information we track is the number of moves done, a `counter`. 
 
 There is a neat trick to determine whether it is `X`'s or `O`'s turn to move given the counter. If `counter` is even, it's `X`'s turn, if it's odd, it's `O`'s turn (you might do it the other way around if you like). If you think about `counter` in its binary form, `counter` is even if the rightmost bit (the LSB) is zero and it is odd if the LSB is one. Using the AND-operator, `counter & 1` returns `0` for even counts and `1` for odd counts. We will use this trick to determine, which bitboard of the two we are interested in.
 
-### Remember the History of Moves Done
+### Maintain a History of Moves Done
 
 In a variable called `moves`, actually an array declared `int[] moves`, we remember the moves done so far. The moves are represented by the columns given when a move is made. `moves[0]` stores the first move, `moves[1]` the second and so on. We use `counter` to write to the right cell in `moves` when we make a move as well as to recall the last move, when we undo it.  
 
