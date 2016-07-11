@@ -291,7 +291,7 @@ Last but not least, we need a generator to identify possible moves in a given si
 
 ~~~
 int[] listMoves() {
-    int[] moves; // ArrayList<int>
+    int[] moves;
     long TOP = 1000000_1000000_1000000_1000000_1000000_1000000_1000000L;
     for(int col = 0; col <= 6; col++) {
         if (TOP & (1L << height[col]) == 0) moves.push(col);
@@ -302,4 +302,10 @@ int[] listMoves() {
 
 We do so with a helper variable called `TOP`, which encodes the positions of the additional row on top of the board (positions 6, 13, 20, 27, 34, 41, 48). When we simulate the code for making a move (shifting a bit by `height[col]`), that bit is not supposed to land in the additional top row, marking the column full. If the column is not full, the column gets listed in `moves`.
 
+----
 
+That's it folks.
+
+If you think things through you realize that bitboards are just a highly optimized data structure. The underlying idea is a board encoding by means of an one-dimensional array of integers. Splitting the array into two arrays, one for each party, makes it essentially two bit arrays. And instead of using arrays, a long integer does also qualify as a special case of a bit array. Indexing becomes bit shifting, reading and writing become bit operations. And with bit operations comes parallelization: per direction you check for four in a row for each position on the board.
+
+I hope you enjoyed the fun being on a bit level, even when you are using Java, TypeScript or any other "high-level" language.
