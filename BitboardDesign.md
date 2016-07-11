@@ -287,17 +287,19 @@ On a machine crunching 2 billion instructions per second, we can run 50 million 
 
 ### A Generator to List Moves
 
+Last but not least, we need a generator to identify possible moves in a given situation of play. The list of moves (`int[] moves`) is calculated by `listMoves` and returned, each value representing a column which is not full yet.
+
 ~~~
 int[] listMoves() {
-    int[] moves; // ArrayList<int> bzw. ArrayList<Integer>
+    int[] moves; // ArrayList<int>
     long TOP = 1000000_1000000_1000000_1000000_1000000_1000000_1000000L;
-
-    let long bitboard = this.bitboard[counter & 1];
-    let long newboard;
-    for(int col = 0; col <= 6; col++) {  
-        newboard = bitboard | (1L << height[col]); // simulation of move
-        if (newboard & TOP == 0) moves.push(col);
+    for(int col = 0; col <= 6; col++) {
+        if (TOP & (1L << height[col]) == 0) moves.push(col);
     }
     return moves;
 }
 ~~~
+
+We do so with a helper variable called `TOP`, which encodes the positions of the additional row on top of the board (positions 6, 13, 20, 27, 34, 41, 48). When we simulate the code for making a move (shifting a bit by `height[col]`), that bit is not supposed to land in the additional top row, marking the column full. If the column is not full, the column gets listed in `moves`.
+
+
