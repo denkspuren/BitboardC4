@@ -18,6 +18,8 @@ Dominikus Herzberg, [@denkspuren](https://twitter.com/denkspuren)
 
 ## A Binary Board Encoding for Connect Four
 
+We discuss the data structures required first, before we move on explaning how to use them.
+
 ### Using Two Longs to Encode the Board
 
 In Java and in many other programming languages, a so-called long integer is composed of eight bytes.
@@ -178,7 +180,7 @@ There is a neat trick to determine whether it is `X`'s or `O`'s turn to move giv
 
 In a variable called `moves`, actually an array declared `int[] moves`, we remember the moves done so far. The moves are represented by the columns given when a move is made. `moves[0]` stores the first move, `moves[1]` the second and so on. We use `counter` to write to the right cell in `moves` when we make a move as well as to recall the last move, when we undo it.  
 
-### Make Move
+### Make a Move
 
 Have a look at the code that describes how to make a move given a column; the column being an integer value ranging from `0` to `6` including both limiting values. It's just three line of code in the body of `makeMove`.
 
@@ -198,7 +200,7 @@ The code says:
 
 Even if you are not into the details of a programming language (which makes it three lines of code instead of, say, five), you should get the idea of what's going on.
 
-### Undo Move
+### Undo a Move
 
 Method `undoMove` basically reverses the steps done in `makeMove`. See yourself:
 
@@ -214,7 +216,7 @@ void undoMove() {
 2. We decrement and store the new `height` for `col` first (again, `--` is in prefix position), take the new value and shift a bit (`1L`) to the corresponding position in the bit pattern and store it in `move`.
 3. We unset the bit in the corresponding bitboard. This step "reserves" the second action in `makeMove`, the setting of the bit.  
 
-### Four In A Row?
+### Are there Four In A Row?
 
 We are getting to the heart, why we are using bitboards. Since we need to check for four in a row almost every time a move is made, it is in our interest to get the check done as quickly as possible. Speed improves the number of positions investigated per second, and the sheer number of positions crunched correlates with the perceived computer's "intelligence" of play.
 
@@ -287,7 +289,7 @@ Per direction the routine needs one assignment, two shifts, two binary AND-opera
 
 On a machine crunching 2 billion instructions per second, we can run 50 million checks of `isWin` per second (assuming 40 instructions per check). That's quite a number.
 
-### A Generator to List Moves
+### Generate Valid Moves
 
 Last but not least, we need a generator to identify possible moves in a given situation of play. The list of moves (`int[] moves`) is calculated by `listMoves` and returned, each value representing a column which is not full yet.
 
