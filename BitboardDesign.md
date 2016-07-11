@@ -166,7 +166,9 @@ The variable `height` serves as a memory where the next disk goes given the colu
 
 ### Counting helps
 
-Another piece of information we track is the number of moves done, a `counter`. Each time we make a move we increment the counter, each time we undo a move we decrement the counter. For incrementation we use the increment operator `++` (add one), for decrementation we use the decrement operator `--` (subtract one).
+Another piece of information we track is the number of moves done, a `counter`. Each time we make a move we increment the counter, each time we undo a move we decrement the counter. For incrementation we use the increment operator `++` (add one), for decrementation we use the decrement operator `--` (subtract one). We use incrementation and decrementation also for manipulating the `height` per column.
+
+There is a neat trick to determine whether it is `X`'s or `O`'s turn to move given the counter. If `counter` is even, it's `X`'s turn, if it's odd, it's `O`'s turn (you might do it the other way around if you like). If you think about `counter` in its binary form, `counter` is even if the rightmost bit (the LSB) is zero and it is odd if the LSB is one. Using the AND-operator, `counter & 1` returns `0` for even counts and `1` for odd counts. We will use this trick to determine, which bitboard of the two we are interested in.
 
 ### Make Move
 
