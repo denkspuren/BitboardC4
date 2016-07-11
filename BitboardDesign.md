@@ -138,7 +138,9 @@ For more information on bit shifting and other bit operations such as OR, AND an
 
 ## Let's Play with the Bitboards
 
-To demonstrate the use of bitboards we implement four methods: make a move (`makeMove`), undo a move (`undoMove`), check whether there are four in a row (`isWin`), list all possible moves in a given situation (`listMoves`). As our means of communication, we use pseudo-code which is close to TypeScript and Java. Only slight adaptations are required for any of the two languages. It is up to you to properly embed this code in a class statement. 
+To demonstrate the use of bitboards we implement four methods: make a move (`makeMove`), undo a move (`undoMove`), check whether there are four in a row (`isWin`), and list all possible moves in a given situation (`listMoves`). As our means of communication, we use pseudo-code which is close to TypeScript and Java. Only slight adaptations are required for any of the two languages. It is up to you to properly embed this code in a class statement.
+
+Before we look into the methods, we need some few data the methods operate on: `height`, `counter` and `moves`. Together with the bitboard array (see above) the implementation of the methods is almost trivial. So, pay a little bit attention to the data required.
 
 ### Remember the Fill Level
 
