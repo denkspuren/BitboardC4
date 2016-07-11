@@ -198,6 +198,8 @@ The code says:
 
 ### Undo Move
 
+Method `undoMove` basically reverses the steps done in `makeMove`. See yourself:
+
 ~~~
 void undoMove() {
     int col = moves[--counter];     // reverses (3)
@@ -205,6 +207,10 @@ void undoMove() {
     bitboard[counter & 1] ^= move;  // reverses (2)
 }
 ~~~
+
+1. The column (`col`) is determined from the history of `moves`; prior to accessing the history (because `--` is in prefix position), `counter` is decremented. This step "reverses" the last action in `makeMove`, so to speak.
+2. We decrement and store the new `height` for `col` first (again, `--` is in prefix position), take the new value and shift a bit (`1L`) to the corresponding position in the bit pattern and store it in `move`.
+3. We unset the bit in the corresponding bitboard. This step "reserves" the second action in `makeMove`, the setting of the bit.  
 
 ### Four In A Row?
 
