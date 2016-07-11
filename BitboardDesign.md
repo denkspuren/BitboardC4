@@ -166,11 +166,15 @@ int[] height = {0, 7, 15, 24, 30, 35, 42};
 
 The variable `height` serves as a memory where the next disk goes given the column. Otherwise we would need to search for the next empty slot given the bottom of a column. Having a memory saves searching and makes things faster. And that is what we are up to with bitboards. We want to be as fast as possible with manipulating a board representation of Connect Four.
 
-### Counting helps
+### Have a Counter
 
 Another piece of information we track is the number of moves done, a `counter`. Each time we make a move we increment the counter, each time we undo a move we decrement the counter. For incrementation we use the increment operator `++` (add one), for decrementation we use the decrement operator `--` (subtract one). We use incrementation and decrementation also for manipulating the `height` per column.
 
 There is a neat trick to determine whether it is `X`'s or `O`'s turn to move given the counter. If `counter` is even, it's `X`'s turn, if it's odd, it's `O`'s turn (you might do it the other way around if you like). If you think about `counter` in its binary form, `counter` is even if the rightmost bit (the LSB) is zero and it is odd if the LSB is one. Using the AND-operator, `counter & 1` returns `0` for even counts and `1` for odd counts. We will use this trick to determine, which bitboard of the two we are interested in.
+
+### Remember the History of Moves Done
+
+In a variable called `moves`, actually an array declared `int[] moves`, we remember the moves done so far. The moves are represented by the columns given when a move is made. `moves[0]` stores the first move, `moves[1]` the second and so on. We use `counter` to write to the right cell in `moves` when we make a move as well as to recall the last move, when we undo it.  
 
 ### Make Move
 
