@@ -9,8 +9,8 @@ The encoding is designed for speed in operating with the board. Especially query
 
 I figured that my students struggle with understanding John's implementation. That's why I created this document.
 My explanation leans on John's code. However, we don't go through John's code line by line. Instead, I try to
-help you get the point of the encoding and the way using it. Equipped with this understanding you should figure out
-the details of John's implementation yourself.
+help you get the point of the encoding and the way using it. Equipped with this understanding it should be fairly easy to figure out
+the details of John's implementation by yourself.
 
 Enjoy,
 
