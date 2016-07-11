@@ -221,14 +221,14 @@ We are getting to the heart, why we are using bitboards. Since we need to check 
 Look again at the encoding of positions in a bitboard.
 
 ~~~
-  6 13 20 27 34 41 48    Additional row
+  6 13 20 27 34 41 48   55 62     Additional row
 +---------------------+ 
-| 5 12 19 26 33 40 47 |  top row
-| 4 11 18 25 32 39 46 |
-| 3 10 17 24 31 38 45 |
-| 2  9 16 23 30 37 44 |
-| 1  8 15 22 29 36 43 |
-| 0  7 14 21 28 35 42 |  bottom row
+| 5 12 19 26 33 40 47 | 54 61     top row
+| 4 11 18 25 32 39 46 | 53 60
+| 3 10 17 24 31 38 45 | 52 59
+| 2  9 16 23 30 37 44 | 51 58
+| 1  8 15 22 29 36 43 | 50 57
+| 0  7 14 21 28 35 42 | 49 56 63  bottom row
 +---------------------+
 ~~~
 
@@ -254,7 +254,9 @@ boolean isWin(long bitboard) {
 }
 ~~~
 
-The code is highly regular and redundant. We might choose to capture the "magic" numbers in an array called `directions` and iterate over the numbers in a `for`-loop.
+Notice that the additional row on the top of the regular board (positions 6, 13, 20, 27, 34, 41, 48) and the additional rows at the right (position 49 and up) are essential. They hold values of zero and are essential to prevent us from finding four in a row crossing "boarders". For example, checking the diagonal 9, 15, 21 has 27 next; "luckily", position 27 -- being a member of the additional top row -- is always zero. Without these additional row and columns our bitboards would not work.
+
+The code above is highly regular and redundant. We might choose to capture the "magic" numbers in an array called `directions` and iterate over the numbers in a `for`-loop.
 
 ~~~
 boolean isWin(long bitboard) {
