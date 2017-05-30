@@ -279,7 +279,7 @@ boolean isWin(long bitboard) {
     long bb;
     for(int direction : directions) {
         bb = bitboard & (bitboard >> direction);
-        if (bb & (bb >> (2 * direction)) != 0) return true;
+        if ((bb & (bb >> (2 * direction))) != 0) return true;
     }
     return false;
 }
@@ -298,7 +298,7 @@ int[] listMoves() {
     int[] moves;
     long TOP = 1000000_1000000_1000000_1000000_1000000_1000000_1000000L;
     for(int col = 0; col <= 6; col++) {
-        if (TOP & (1L << height[col]) == 0) moves.push(col);
+        if ((TOP & (1L << height[col])) == 0) moves.push(col);
     }
     return moves;
 }
