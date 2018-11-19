@@ -14,7 +14,7 @@ the details of John's implementation by yourself.
 
 Enjoy,
 
-Dominikus Herzberg, [@denkspuren](https://twitter.com/denkspuren) 
+Dominikus Herzberg
 
 ## A Binary Board Encoding for Connect Four
 
