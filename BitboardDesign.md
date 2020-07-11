@@ -296,7 +296,7 @@ Last but not least, we need a generator to identify possible moves in a given si
 ~~~
 int[] listMoves() {
     int[] moves;
-    long TOP = 1000000_1000000_1000000_1000000_1000000_1000000_1000000L;
+    long TOP = 0b1000000_1000000_1000000_1000000_1000000_1000000_1000000L;
     for(int col = 0; col <= 6; col++) {
         if ((TOP & (1L << height[col])) == 0) moves.push(col);
     }
