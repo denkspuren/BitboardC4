@@ -240,7 +240,7 @@ Vertically, the difference is 1, take position 15 and 16 as an example. Diagonal
 
 So, the "magic" difference numbers on the bitboard are 1, 6, 7 and 8.
 
-Let's take a bitboard and shift a copy of it by 6 to the right, another copy by twice as much, and a final copy by thrice as much to the right. Then let's "overlay" all copies with the AND-operator. The effect is that all of the vertically distributed positions of the bitboard making up four in a row (vertically) are now queried: Is each one of you a one? If so, we identified four bits in a row.
+Let's take a bitboard and shift a copy of it by 6 to the right, another copy by twice as much, and a final copy by thrice as much to the right. Then let's "overlay" all copies with the AND-operator. The effect is that all of the diagonally ( \\ ) distributed positions of the bitboard making up four in a row (diagonally) are now queried: Is each one of you a one? If so, we identified four bits in a row.
 
 The point is that bit shifting and combining bits make it a parallel computation for all positions on the board! You don't look at an individual position, you look at all the positions on the board at once and check for their neighbors being another three bits set as well.
 
